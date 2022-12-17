@@ -1,4 +1,3 @@
-var tasks = {};
 var now = moment();
 var container = document.querySelector('.container');
 var timesArray = [ '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM', '5 PM' ];
@@ -23,7 +22,7 @@ var timeBlocks = function() {
         // textarea for taskinput
         var taskInput = document.createElement('textarea');
             taskInput.setAttribute('class', 'col-sm-10 taskInput textarea');
-            taskInput.setAttribute('taskId', i);
+            taskInput.setAttribute('data-taskId', i);
         timeRows.appendChild(taskInput);
         // save button
         var saveButton = document.createElement('button');
@@ -56,16 +55,28 @@ var timeBlocks = function() {
 timeBlocks();
 
 // save button; saves to localStorage 
-var saveTasks = function() {
-    localStorage.setItem("tasks", JSON.stringify());
-}
 $('.saveBtn').on('click', function() {
-    saveTasks();
+    let taskInput = $(this).siblings(".taskInput").val();
+    let taskId = $(this).siblings(".taskInput").attr("data-taskId");
+
+    localStorage.setItem(taskId, JSON.stringify(taskInput));
+    console.log(`Saved data for text box ${taskId}.`)
 })
 
 // load from localStorage
 var loadTasks = function() {
-    tasks = JSON.parse(localStorage.getItem("tasks"));
+    for ( i = 0; i < timesArray.length; i++ ) {
+        var taskInput = $('.taskInput');
+        taskInput.each(function(i, input) {
+            var taskId = $(input).attr("data-taskId");
+            var taskInput = JSON.parse(localStorage.getItem(taskId));
+
+            $(input).text(taskInput);
+        });
+        //console.log(`Loaded save data for text box ${i}.`);
+        //console.log(localStorage.getItem(i));
+    }
+    console.log('Data Loaded.')
 }
 
 loadTasks();
