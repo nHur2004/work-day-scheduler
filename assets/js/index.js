@@ -7,23 +7,26 @@ var timeBlocks = function() {
     for ( var i = 0; i < timesArray.length; i++ ) {
         // div that holds each time
         var timeRows = document.createElement('div');
-            timeRows.setAttribute('class', 'row timeRows');
+            timeRows.setAttribute('class', 'row time-block');
         container.appendChild(timeRows);
+
         // hour display
         var hourDisplay = document.createElement('div');
-            hourDisplay.setAttribute('class', 'col-sm-1 hourDisplay');
+            hourDisplay.setAttribute('class', 'col-sm-1 hour');
             hourDisplay.textContent = timesArray[i];
         timeRows.appendChild(hourDisplay);
         // textarea for taskinput
         var taskInput = document.createElement('textarea');
-            taskInput.setAttribute('class', 'col-sm-10 taskInput');
+            taskInput.setAttribute('class', 'col-sm-10 taskInput textarea');
         timeRows.appendChild(taskInput);
         // save button
         var saveButton = document.createElement('button');
-            saveButton.setAttribute('class', 'col-sm-1 btn saveButton');
-            // change to that save icon thingy
-            saveButton.textContent = "Save";
+            saveButton.setAttribute('class', 'col-sm-1 saveBtn');
         timeRows.appendChild(saveButton);
+            // save icon
+            var saveIcon = document.createElement('i');
+                saveIcon.setAttribute('class', 'fa-solid fa-floppy-disk');
+            saveButton.appendChild(saveIcon);
 
         // just moment().hours();
         var hourNow = now.hours(); 
