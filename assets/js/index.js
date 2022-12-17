@@ -3,6 +3,10 @@ var now = moment();
 var container = document.querySelector('.container');
 var timesArray = [ '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM', '5 PM' ];
 
+// currentDay display
+var currentDay = document.getElementById('currentDay');
+currentDay.textContent = (now.format("[Today is] dddd, [at] hA"));
+
 // create loop to make timeblocks
 var timeBlocks = function() {
     for ( var i = 0; i < timesArray.length; i++ ) {
@@ -19,6 +23,7 @@ var timeBlocks = function() {
         // textarea for taskinput
         var taskInput = document.createElement('textarea');
             taskInput.setAttribute('class', 'col-sm-10 taskInput textarea');
+            taskInput.setAttribute('taskId', i);
         timeRows.appendChild(taskInput);
         // save button
         var saveButton = document.createElement('button');
@@ -52,11 +57,15 @@ timeBlocks();
 
 // save button; saves to localStorage 
 var saveTasks = function() {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+    localStorage.setItem("tasks", JSON.stringify());
 }
 $('.saveBtn').on('click', function() {
-    console.log('click!')
+    saveTasks();
 })
 
 // load from localStorage
+var loadTasks = function() {
+    tasks = JSON.parse(localStorage.getItem("tasks"));
+}
 
+loadTasks();
