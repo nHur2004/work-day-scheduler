@@ -18,6 +18,12 @@ var timeBlocks = function() {
         var taskInput = document.createElement('textarea');
         taskInput.setAttribute('class', 'col-sm-10');
         timeRows.appendChild(taskInput);
+        // save button
+        var saveButton = document.createElement('button');
+        saveButton.setAttribute('class', 'col-sm-1 btn');
+            // change to that save icon thingy
+        saveButton.textContent = "Save";
+        timeRows.appendChild(saveButton);
     }
 }
 
