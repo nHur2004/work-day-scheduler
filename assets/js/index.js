@@ -25,20 +25,23 @@ var timeBlocks = function() {
             saveButton.textContent = "Save";
         timeRows.appendChild(saveButton);
 
-        // add 9 to i because i=0, timeArray starts at 9, use 24 hour clock
-        var timeNow = i + 9;
         // just moment().hours();
         var hourNow = now.hours(); 
         var timeColorBG = $('.taskInput');
 
         // past(secondary) present(danger) future(success) colour assignment
-        if ( timeNow < hourNow ) {
-            timeColorBG.addClass('past');
-        } else if ( timeNow = hourNow ) {
-            timeColorBG.addClass('present');
-        } else if ( timeNow > hourNow ) {
-            timeColorBG.addClass('future');
-        }
+        $(timeColorBG).each(function(i, timeColorBG) {
+            // add 9 to i because i=0, timeArray starts at 9, use 24 hour clock
+            var timeNow = i + 9;
+            
+            if ( timeNow < hourNow ) {
+                $(timeColorBG).addClass('past');
+            } else if ( timeNow === hourNow ) {
+                $(timeColorBG).addClass('present');
+            } else {
+                $(timeColorBG).addClass('future');
+            }
+        });
     }
 }
 
