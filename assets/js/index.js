@@ -14,6 +14,10 @@ var timeBlocks = function() {
         hourDisplay.setAttribute('class', 'col-sm-1');
         hourDisplay.textContent = timesArray[i];
         timeRows.appendChild(hourDisplay);
+        // textarea for taskinput
+        var taskInput = document.createElement('textarea');
+        taskInput.setAttribute('class', 'col-sm-10');
+        timeRows.appendChild(taskInput);
     }
 }
 
