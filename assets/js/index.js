@@ -1,3 +1,4 @@
+var tasks = {};
 var now = moment();
 var container = document.querySelector('.container');
 var timesArray = [ '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM', '5 PM' ];
@@ -31,8 +32,7 @@ var timeBlocks = function() {
         // just moment().hours();
         var hourNow = now.hours(); 
         var timeColorBG = $('.taskInput');
-
-        // past(secondary) present(danger) future(success) colour assignment
+        // past present future colour assignment
         $(timeColorBG).each(function(i, timeColorBG) {
             // add 9 to i because i=0, timeArray starts at 9, use 24 hour clock
             var timeNow = i + 9;
@@ -47,12 +47,16 @@ var timeBlocks = function() {
         });
     }
 }
-
 // load timeblocks before loading storage
 timeBlocks();
 
 // save button; saves to localStorage 
-
+var saveTasks = function() {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+$('.saveBtn').on('click', function() {
+    console.log('click!')
+})
 
 // load from localStorage
 
